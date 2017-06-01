@@ -1,1 +1,6 @@
 .idea
+/rocketmq-console/.classpath
+/rocketmq-console/.project
+/rocketmq-console/.settings/org.eclipse.core.resources.prefs
+/rocketmq-console/.settings/org.eclipse.jdt.core.prefs
+/rocketmq-console/.settings/org.eclipse.m2e.core.prefs
