@@ -404,3 +404,10 @@ module.controller('routerViewDialogController', ['$scope', 'ngDialog', '$http','
     }]
 
 );
+
+/*
+ * Filter for encoding strings for use in URL query strings
+ */
+module.filter('urlEncode', [function() {
+  return window.encodeURIComponent;
+}]);

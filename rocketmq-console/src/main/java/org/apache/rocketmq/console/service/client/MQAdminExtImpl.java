@@ -499,12 +499,12 @@ public class MQAdminExtImpl implements MQAdminExt {
         List<String> list) throws InterruptedException, RemotingTimeoutException, RemotingSendRequestException, RemotingConnectException, MQClientException, UnsupportedEncodingException {
         return null;
     }
-
-	@Override
-	public QueryConsumeQueueResponseBody queryConsumeQueue(String brokerAddr, String topic, int queueId, long index,
-			int count, String consumerGroup) throws InterruptedException, RemotingTimeoutException,
-			RemotingSendRequestException, RemotingConnectException, MQClientException {
-		logger.error("queryConsumeQueue is not supported temp");
-		return null;
-	}
+    
+    @Override
+    public QueryConsumeQueueResponseBody queryConsumeQueue(String brokerAddr, String topic, int queueId, long index,
+            int count, String consumerGroup) throws InterruptedException, RemotingTimeoutException,
+            RemotingSendRequestException, RemotingConnectException, MQClientException {
+        logger.error("queryConsumeQueue is not supported temp");
+        return null;
+    }
 }

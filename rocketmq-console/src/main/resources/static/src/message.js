@@ -17,7 +17,7 @@
 
 var module = app;
 
-module.controller('messageController', ['$scope', 'ngDialog', '$http','Notification',function ($scope, ngDialog, $http,Notification) {
+module.controller('messageController', ['$scope', 'ngDialog', '$http','Notification', '$routeParams',function ($scope, ngDialog, $http,Notification, $routeParams) {
     $scope.allTopicList = [];
     $scope.selectedTopic =[];
     $scope.key ="";
@@ -25,6 +25,7 @@ module.controller('messageController', ['$scope', 'ngDialog', '$http','Notificat
     $scope.queryMessageByTopicResult=[];
     $scope.queryMessageByTopicAndKeyResult=[];
     $scope.queryMessageByMessageIdResult={};
+
     $http({
         method: "GET",
         url: "topic/list.query"
@@ -32,6 +33,10 @@ module.controller('messageController', ['$scope', 'ngDialog', '$http','Notificat
         if(resp.status ==0){
             $scope.allTopicList = resp.data.topicList.sort();
             console.log($scope.allTopicList);
+            var selected = $routeParams.topic;
+            if (selected != undefined && selected != "") {
+            	$scope.selectedTopic=selected;
+            }
         }else {
             Notification.error({message: resp.errMsg, delay: 2000});
         }
@@ -51,7 +56,6 @@ module.controller('messageController', ['$scope', 'ngDialog', '$http','Notificat
             $scope.changeShowMessageList(this.currentPage,this.totalItems);
         }
     };
-
 
     $scope.queryMessageByTopic = function () {
         console.log($scope.selectedTopic);
@@ -144,7 +148,6 @@ module.controller('messageController', ['$scope', 'ngDialog', '$http','Notificat
             }
         });
     };
-
 
     $scope.changeShowMessageList = function (currentPage,totalItem) {
         var perPage = $scope.paginationConf.itemsPerPage;

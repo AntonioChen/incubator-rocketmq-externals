@@ -87,21 +87,21 @@ public class MonitorServiceImpl implements MonitorService {
     }
 
     @PostConstruct
-	private void loadData() {
-		String content;
-		try {
-			content = MixAll.file2String(getConsumerMonitorConfigDataPath());
-			if (content == null) {
-				content = MixAll.file2String(getConsumerMonitorConfigDataPathBackUp());
-			}
-			if (content == null) {
-				return;
-			}
-			configMap = JsonUtil.string2Obj(content,
-					new TypeReference<ConcurrentHashMap<String, ConsumerMonitorConfig>>() {
-					});
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    private void loadData() {
+        String content;
+        try {
+            content = MixAll.file2String(getConsumerMonitorConfigDataPath());
+            if (content == null) {
+                content = MixAll.file2String(getConsumerMonitorConfigDataPathBackUp());
+            }
+            if (content == null) {
+                return;
+            }
+            configMap = JsonUtil.string2Obj(content,
+                    new TypeReference<ConcurrentHashMap<String, ConsumerMonitorConfig>>() {
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
