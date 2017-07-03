@@ -40,10 +40,14 @@
                 <table class="table table-bordered text-middle">
                     <tr>
                         <th class="text-center">{{'TOPIC' | translate}}</th>
+                        <td class="text-center">{{'lastUpdateTime'}}</td>
+                        <td class="text-center">{{'msgCount'}}</td>
                         <th class="text-center">{{ 'OPERATION' | translate}}</th>
                     </tr>
-                    <tr ng-repeat="topic in topicShowList">
+                    <tr ng-repeat="(topic, stats) in topicShowList">
                         <td class="text-center">{{topic}}</td>
+                        <td class="text-center">{{stats.lastUpdateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td class="text-center">{{stats.msgCount}}</td>
                         <td class="text-center">
                             <a class="btn btn-raised btn-sm btn-primary" 
                                     ng-href="#/message/{{topic | urlEncode}}">{{'MESSAGE' | translate}}

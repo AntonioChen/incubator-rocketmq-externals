@@ -44,7 +44,6 @@ module.controller('topicController', ['$scope', 'ngDialog', '$http','Notificatio
             console.log($scope.allTopicList);
             console.log(JSON.stringify(resp));
             $scope.showTopicList(1,$scope.allTopicList.length);
-
         }else {
             Notification.error({message: resp.errMsg, delay: 5000});
         }
@@ -78,7 +77,33 @@ module.controller('topicController', ['$scope', 'ngDialog', '$http','Notificatio
         var perPage = $scope.paginationConf.itemsPerPage;
         var from = (currentPage - 1) * perPage;
         var to = (from + perPage)>canShowList.length?canShowList.length:from + perPage;
-        $scope.topicShowList = canShowList.slice(from, to);
+        var topicList = canShowList.slice(from, to);
+        var topicShowList = {};
+        topicList.forEach(function(topic) {
+        	var topicStats = {topic:topic, lastUpdateTime:undefined};
+        	topicShowList[topic] = topicStats;
+            $http({
+                method: "GET",
+                url: "topic/stats.query",
+                params: {topic: topic}
+            }).success(function (resp) {
+                if (resp.status == 0) {
+                	var maxTime = 0;
+                	var msgCount = 0;
+                	console.log(resp.data.offsetTable);
+                	for (var queue in resp.data.offsetTable) {
+                		maxTime = maxTime > resp.data.offsetTable[queue].lastUpdateTimestamp ? maxTime : resp.data.offsetTable[queue].lastUpdateTimestamp;
+                		msgCount += resp.data.offsetTable[queue].maxOffset - resp.data.offsetTable[queue].minOffset;
+                	}
+                	$scope.topicShowList[topic].lastUpdateTime=maxTime;
+                	$scope.topicShowList[topic].msgCount=msgCount;
+                }else {
+                    Notification.error({message: resp.errMsg, delay: 2000});
+                }
+            });
+        });
+        
+        $scope.topicShowList = topicShowList;
     };
 
     $scope.filterByType = function(str){
