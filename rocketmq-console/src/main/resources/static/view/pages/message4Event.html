@@ -65,14 +65,14 @@
                                 </form>
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th class="text-center">Message ID</th>
-                                        <th class="text-center">Tag</th>
+                                        <th class="text-center">Producer Group</th>
+                                        <th class="text-center">Event</th>
                                         <th class="text-center">Key</th>
                                         <th class="text-center">StoreTime</th>
                                         <th class="text-center">Operation</th>
                                     </tr>
                                     <tr ng-repeat="item in messageShowList">
-                                        <td class="text-center">{{item.msgId}}</td>
+                                        <td class="text-center">{{item.properties.PGROUP}}</td>
                                         <td class="text-center">{{item.properties.TAGS}}</td>
                                         <td class="text-center">{{item.properties.KEYS}}</td>
                                         <td class="text-center">{{item.storeTimestamp | date:'yyyy-MM-dd HH:mm:ss'}}
@@ -121,14 +121,14 @@
                             </form>
                             <table class="table table-bordered">
                                 <tr>
-                                    <th class="text-center">Message ID</th>
-                                    <th class="text-center">Tag</th>
+                                    <th class="text-center">Producer Group</th>
+                                    <th class="text-center">Event</th>
                                     <th class="text-center">Key</th>
                                     <th class="text-center">StoreTime</th>
                                     <th class="text-center">Operation</th>
                                 </tr>
                                 <tr ng-repeat="item in queryMessageByTopicAndKeyResult">
-                                    <td class="text-center">{{item.msgId}}</td>
+                                    <td class="text-center">{{item.properties.PGROUP}}</td>
                                     <td class="text-center">{{item.properties.TAGS}}</td>
                                     <td class="text-center">{{item.properties.KEYS}}</td>
                                     <td class="text-center">{{item.storeTimestamp | date:'yyyy-MM-dd HH:mm:ss'}}
@@ -180,24 +180,24 @@
 </div>
 
 
-<script type="text/ng-template" id="messageDetailViewDialog">
+<script type="text/ng-template" id="message4EventDetailViewDialog">
     <md-content class="md-padding">
         <div>
             <form id="addAppForm" name="addAppForm" class="form-horizontal" novalidate>
                 <div class="form-group">
-                    <label class="control-label col-sm-1">Message ID:</label>
+                    <label class="control-label col-sm-1">Producer Group:</label>
                     <div class="col-sm-5">
-                        <label class="form-control">{{ngDialogData.messageView.msgId}}</label>
+                        <label class="form-control">{{ngDialogData.messageView.properties.PGROUP}}</label>
                     </div>
                     <label class="control-label col-sm-1">Topic:</label>
                     <div class="col-sm-5">
                         <label class="form-control">{{ngDialogData.messageView.topic}}</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-1">Tag:</label>
+                <div class="form-group">             
+                    <label class="control-label col-sm-1">Message ID:</label>
                     <div class="col-sm-5">
-                        <label class="form-control">{{ngDialogData.messageView.properties.TAGS}}</label>
+                        <label class="form-control">{{ngDialogData.messageView.msgId}}</label>
                     </div>
                     <label class="control-label col-sm-1">Key:</label>
                     <div class="col-sm-5">
@@ -205,16 +205,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-1">Storetime:</label>
-                    <div class="col-sm-3">
-                        <label class="form-control">{{ngDialogData.messageView.storeTimestamp | date:'yyyy-MM-dd HH:mm:ss'}}</label>
+                    <label class="control-label col-sm-1">Tag:</label>
+                    <div class="col-sm-5">
+                        <label class="form-control">{{ngDialogData.messageView.properties.TAGS}}</label>
                     </div>
-                    <label class="control-label col-sm-2">CommitLog Offset:</label>
-                    <div class="col-sm-2">
-                        <label class="form-control">{{ngDialogData.messageView.commitLogOffset}}</label>
-                    </div>
-                    <label class="control-label col-sm-2">reconsume Times:</label>
-                    <div class="col-sm-2">
+                    <label class="control-label col-sm-1">reconsume Times:</label>
+                    <div class="col-sm-1">
                         <label class="form-control">{{ngDialogData.messageView.reconsumeTimes}}</label>
                     </div>
                 </div>
@@ -227,9 +223,25 @@
                     <div class="col-sm-1">
                         <label class="form-control">{{ngDialogData.messageView.queueOffset}}</label>
                     </div>
-                    <label class="control-label col-sm-1">Producer Group:</label>
-                    <div class="col-sm-7">
-                        <label class="form-control">{{ngDialogData.messageView.properties.PGROUP}}</label>
+                    <label class="control-label col-sm-2">CommitLog Offset:</label>
+                    <div class="col-sm-2">
+                        <label class="form-control">{{ngDialogData.messageView.commitLogOffset}}</label>
+                    </div>
+                    <label class="control-label col-sm-1">Storetime:</label>
+                    <div class="col-sm-3">
+                        <label class="form-control">{{ngDialogData.messageView.storeTimestamp | date:'yyyy-MM-dd HH:mm:ss'}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1">Glabel Id:</label>
+                    <div class="col-sm-5">
+                        <label class="form-control">{{ngDialogData.messageView.invokeBody.calleeXidContext.globalString}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1">Branch Id:</label>
+                    <div class="col-sm-11">
+                        <label class="form-control">{{ngDialogData.messageView.invokeBody.calleeXidContext.branchString}}</label>
                     </div>
                 </div>
                 <div class="form-group">

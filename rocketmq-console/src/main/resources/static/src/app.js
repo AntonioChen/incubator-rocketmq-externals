@@ -142,12 +142,12 @@ app.config(['$routeProvider', '$httpProvider','$cookiesProvider','getDictNamePro
         }).when('/producer', {
             templateUrl: 'view/pages/producer.html',
             controller:'producerController'
-//        }).when('/message/ASSURED_INVOKE', {
-//        	templateUrl: 'view/pages/message4AssuredInvoke.html',
-//        	controller:'message4AssuredInvokeController'
-//        }).when('/message/EVENT', {
-//        	templateUrl: 'view/pages/message4Event.html',
-//        	controller:'message4EventController'
+        }).when('/message/ASSURED_INVOKE', {
+        	templateUrl: 'view/pages/message4AssuredInvoke.html',
+        	controller:'message4AssuredInvokeController'
+        }).when('/message/EVENT', {
+        	templateUrl: 'view/pages/message4Event.html',
+        	controller:'message4EventController'
         }).when('/message/:topic', {
             templateUrl: 'view/pages/message.html',
             controller:'messageController'
