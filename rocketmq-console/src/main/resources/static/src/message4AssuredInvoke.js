@@ -145,6 +145,7 @@ module.controller('message4AssuredInvokeController', ['$scope', 'ngDialog', '$ht
         }).success(function (resp) {
             if (resp.status == 0) {
             	resp.data.messageView.invokeBody = JSON.parse(resp.data.messageView.messageBody);
+            	resp.data.messageView.invokeBody.paramsStr = JSON.stringify(resp.data.messageView.invokeBody.params);
                 resp.data.messageTrackList=resp.data.messageTrackList.filter(function(element) {
                 	return element.consumerGroup.indexOf($scope.filterKey) > -1 && element.consumerGroup.indexOf(resp.data.messageView.properties.TAGS) > -1;
                 }).sort();
